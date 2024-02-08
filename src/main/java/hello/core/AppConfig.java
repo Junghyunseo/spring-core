@@ -8,14 +8,21 @@ import hello.core.member.MemberServiceImpl;
 import hello.core.member.MemoryMemberRepository;
 import hello.core.order.OrderService;
 import hello.core.order.OrderServiceImpl;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
+
+@Configuration // 설정 정보, 구성 정보
 public class AppConfig {
 
+    @Bean // 메소드들이 스프링 컨테이너에 등록됨.
     public MemberService memberService(){
         return new MemberServiceImpl(memberRepository());
     }
 
-    private static MemoryMemberRepository memberRepository() { // memberRepository 역할도 드러나게 되었다.
+    @Bean
+    public static MemoryMemberRepository memberRepository() { // memberRepository 역할도 드러나게 되었다.
+
         return new MemoryMemberRepository();
     }
     // 어디선가 AppConfig를 통해 멤버 서비스를 불러 쓴다. 멤버서비스 구현체인 객체가 생성된다.(MemberServiceImpl)
@@ -26,10 +33,13 @@ public class AppConfig {
     // new MemoryMemberRepository 위 아래 중복도 있다.
     // Ctrl + Alt + M 하고, memberRepository  생성. return type: interface
 
+    @Bean
     public OrderService orderService(){ // 이거 할 때 OrderServciceImpl에서 생성하는 new~ 부분 지우기.
+
         return new OrderServiceImpl(memberRepository(), discountPolicy());
     }
 
+    @Bean
     public DiscountPolicy discountPolicy(){
         //return new FixDiscountPolicy();
         return new RateDiscountPolicy();
