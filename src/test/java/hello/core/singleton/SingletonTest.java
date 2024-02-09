@@ -5,6 +5,11 @@ import hello.core.member.MemberService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.test.context.TestExecutionListeners;
+
+import java.lang.reflect.AnnotatedArrayType;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -39,7 +44,22 @@ public class SingletonTest {
         assertThat(singletonService1).isSameAs(singletonService2);
         // same : == 참조를 비교(진짜 인스턴스를 비교)
         // equal: 자바의 equals라는 메소드
+    }
 
+    @Test
+    @DisplayName("스프링 컨테이너와 싱글톤")
+    void springContainer(){
+        //AppConfig appConfig = new AppConfig();
+        ApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
+
+        MemberService memberService1 = ac.getBean("memberService", MemberService.class);
+        MemberService memberService2 = ac.getBean("memberService", MemberService.class);
+        // 조회할 때마다 스프링이 처음에 컨테이너에 빈 등록한 거를 계속 반환해줌. -> singleton
+        System.out.println("memberService1 = " + memberService1);
+        System.out.println("memberService2 = " + memberService2);
+
+        // memberService1 != meberService2
+        assertThat(memberService1).isSameAs(memberService2);
     }
 
 }
