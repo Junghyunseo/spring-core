@@ -26,4 +26,20 @@ public class SingletonTest {
         // memberService1 != meberService2
         assertThat(memberService1).isNotEqualTo(memberService2);
     }
+
+    @Test
+    @DisplayName("싱글톤 패턴을 사용한 객체 사용")
+    void singletonServiceTest(){
+        SingletonService singletonService1 = SingletonService.getInstance();
+        SingletonService singletonService2 = SingletonService.getInstance();
+
+        System.out.println("singletonService1 = " + singletonService1); // 같은 객체 인스턴스가 반환이 됨을 확인 할 수 있다.
+        System.out.println("singletonService2 = " + singletonService2);
+
+        assertThat(singletonService1).isSameAs(singletonService2);
+        // same : == 참조를 비교(진짜 인스턴스를 비교)
+        // equal: 자바의 equals라는 메소드
+
+    }
+
 }
