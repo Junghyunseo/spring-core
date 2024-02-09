@@ -28,4 +28,9 @@ public class OrderServiceImpl implements OrderService{
     }// 주문 생성 요청이 오면 회원 정보를 먼저 조회하고, 그 다음에 할인 정책에다가 회원을 넘김.
      // 등급만 넘겨도 되는데, 일단 멤버를 통으로 넘겼다.
      // 그리고 마지막으로 최종 생성된 주문을 반환.
+
+    // 테스트 용도
+    public MemberRepository getMemberRepository() { // MemberSErviceImpl, OrderServiImpl 두 군데에 같은 거 썼다. 싱글톤이 깨질까?
+        return memberRepository;
+    }
 }
