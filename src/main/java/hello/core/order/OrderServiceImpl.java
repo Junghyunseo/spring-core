@@ -4,10 +4,13 @@ import hello.core.discount.DiscountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
 import hello.core.member.MemoryMemberRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component
+//@RequiredArgsConstructor // final이 붙은 필수인 거를 가지고 셍성자를 만들어 줌
 public class OrderServiceImpl implements OrderService{
 
     private final MemberRepository memberRepository ;

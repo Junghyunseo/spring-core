@@ -1,5 +1,8 @@
 package hello.core;
 
+import hello.core.member.MemberRepository;
+import hello.core.member.MemoryMemberRepository;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
@@ -13,5 +16,8 @@ import org.springframework.context.annotation.FilterType;
         // -> Component scan으로 다 뒤져서 스프링 빈으로 등록하는데 그 중에서 뺄 거 지정, 쟤는 수동으로 등록하는거니까 빼줌.
 )
 public class AutoAppConfig {
-
+    //@Bean(name = "memoryMemberRepository") // 빈 이름.
+    //MemberRepository memberRepository(){
+    //    return new MemoryMemberRepository();
+   // }
 }
